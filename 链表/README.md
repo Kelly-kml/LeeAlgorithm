@@ -1,0 +1,159 @@
+## 前言
+
+链表是一种很重要的数据结构，这一章将做一次链表的总结：
+
+首先一个算法的好与坏，时间复杂度和空间复杂度是一个挺重要的衡量指标。引用一下其他大佬总结的不错的文章来阐述一下复杂度的理解与计算：
+
+[如何理解时间复杂度与空间复杂度](https://www.zhihu.com/question/21387264/answer/422323594)
+
+[算法的时间和空间复杂度](https://zhuanlan.zhihu.com/p/50479555)
+
+## 链表 Linked List
+
+链表是一种线性表，但是不是按顺序表一样按顺序存储的，而是一种物理存储结构上非连续、非顺序的存储结构。它是由一系列结点组成，每一个结点分为数据域（用来存储当前元素的数值）和指针域（存储直接后继结点的地址）。
+
+特点：
+
+- 结点在存储器中的位置是任意的，即逻辑相邻的数据元素在物理上不一定相邻
+- 访问时只能通过头指针进入链表，并通过每个结点的指针域依次向后顺序扫描其余结点，所以寻找第一个结点和最后一个结点所花费的时间是不同的
+
+优缺点：
+
+- 链式结构方便随时随地删除、插入数据，时间复杂度为 O(1)，但是寻找、读取数据的效率不如数组高，在随机访问数据中的时间复杂度为 O(m)(m 为访问到的数据在链表中的排列位置)
+
+- 相比于数组，数组可以通过下标寻找、读取数据元素，时间复杂度为 O(1),但是删除、插入就没链表方便
+
+链表有很多不同的类型：
+
+- 单向链表
+
+- 双向链表
+
+- 循环链表
+
+对于链表的使用，需要特别注意**头结点**：
+
+头结点：是在链表的首元结点之前附设的一个结点。
+头指针：是指向链表中第一个结点的指针。
+首元结点：是指链表中存储的第一个数据元素的结点。
+
+在链表中设置头结点有什么好处？
+
+1、便于首元结点的处理
+首元结点的地址保存在头结点的指针域中，所以在链表的第一个位置上的操作和其他位置一致，无须进行特殊处理
+2、便于空表和非空表的统一处理
+无论链表是否为空，头指针都是指向头结点的非空指针，因此空表和非空表的处理也就统一了。
+
+### 单链表
+
+![](../images/%E9%93%BE%E8%A1%A81.png)
+
+**链表创建**
+
+```js
+// 单链表插入、删除、查找
+class LinkedList {
+  constructor(val) {
+    val = val === undefined ? 'head' : val;
+    this.head = new ListNode(val);
+  }
+
+  //找val值结点，没有找到就返回-1
+  findByVal(val) {
+    let current = this.head;
+    while (current !== null && current.val !== val) {
+      current = current.next;
+    }
+    return current ? current : -1;
+  }
+
+  // 插入结点， 在值为val后面插入
+  insert(newVal, val) {
+    let current = this.findByVal(val);
+    if (current === -1) {
+      return false;
+    }
+    let newNode = new ListNode(newVal);
+    newNode.next = current.next;
+    current.next = newNode;
+  }
+
+  // 获取值为nodeVal的前一个结点， 找不到为-1，参数为val
+  // 适用于链表中无重复结点
+  findNodePreByVal(nodeVal) {
+    let current = this.head;
+    while (current.next !== null && current.next.val !== nodeVal) {
+      current = current.next;
+    }
+    return current !== null ? current : -1;
+  }
+
+  // 根据index查找当前结点，参数为index
+  // 可以作为比较链表是否重复结点
+  findByIndex(index) {
+    let current = this.head,
+      pos = 1;
+    while (current.next !== null && pos !== index) {
+      current = current.next;
+      pos++;
+    }
+    return current && pos === index ? current : -1;
+  }
+
+  // 删除某一个结点，删除失败返回false
+  remove(nodeVal) {
+    if (nodeVal === 'head') return false;
+    let needRemoveNode = this.findByVal(nodeVal);
+    if (needRemove === -1) return false;
+    let preNode = this.findNodePreByVal(nodeVal);
+    preNode.next = needRemoveNode.next;
+  }
+
+  // 遍历结点
+  disPlay() {
+    let res = new Array();
+    let current = this.head;
+    while (current !== null) {
+      res.push(current.val);
+      current = current.next;
+    }
+    return res;
+  }
+
+  // 在链表末尾插入一个新结点
+  push(nodeVal) {
+    let current = this.head;
+    let node = new ListNode(nodeVal);
+    while (current.next !== null) {
+      current = current.next;
+    }
+    current.next = node;
+  }
+
+  // 在头部插入
+  frontPush(nodeVal) {
+    let newNode = new ListNode(nodeVal);
+    this.insert(nodeVal, 'head');
+  }
+}
+```
+
+**链表类的使用**
+
+```js
+let demo = new LinkedList(); // LinkedList {head: ListNode}
+// console.log((demo.disPlay()))
+demo.push('1232');
+demo.insert(123, 'head');
+demo.push('last value');
+demo.frontPush('start');
+demo.remove('head');
+// demo.remove('last value')
+// console.log(demo.remove('head'))
+// demo.push('2132')
+// demo.insert('不存在的值', '插入失败') //return -1
+console.log(demo.findByIndex(1));
+console.log(demo.disPlay());
+```
+
+### 双链表
