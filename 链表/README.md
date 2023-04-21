@@ -162,7 +162,10 @@ console.log(demo.disPlay());
 ### 经典题目
 
 ![合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
 ![删除链表节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
+
+![删除链表倒数第n个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
 
 **合并两个有序链表**
 
@@ -263,3 +266,38 @@ var deleteNode = function (head, val) {
 ```
 
 3、时间复杂度 O(n)和空间复杂度为 O(1),n 为链表的长度
+
+**删除链表倒数第 n 个节点**
+
+LeetCode 链接：https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
+
+题目给出链表和 n，要求返回删除后的链表
+
+这道题目与上题![删除链表节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)差不多，只要明白：**链表倒数第 n 个节点 === 链表中（链表长度-n）个节点**，因此，这倒题目先遍历链表得到链表的长度，之后和上题思路一致。
+
+时间和空间复杂度也一样。
+
+```js
+var removeNthFromEnd = function (head, n) {
+  let newHead = new ListNode('-1');
+  newHead.next = head;
+  let curNode = newHead;
+  let count = 0;
+  // 先遍历链表得到链表长度count
+  while (curNode.next) {
+    count++;
+    curNode = curNode.next;
+  }
+  curNode = newHead;
+  let deleteCount = 0;
+  while (curNode) {
+    deleteCount++;
+    if (deleteCount - 1 === count - n) {
+      curNode.next = curNode.next.next;
+      break;
+    }
+    curNode = curNode.next;
+  }
+  return newHead.next;
+};
+```
