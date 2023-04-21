@@ -162,6 +162,7 @@ console.log(demo.disPlay());
 ### 经典题目
 
 ![合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+![删除链表节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
 **合并两个有序链表**
 
@@ -226,3 +227,39 @@ var mergeTwoLists = function (l1, l2) {
 ```
 
 时间复杂度：O(m+n)，空间复杂度：O(1)
+
+**删除链表节点**
+
+LeetCode 链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+
+题目给出链表和要删除的节点的值，要求返回删除节点后的链表
+
+1、删除链表当然是画图最清晰啦！
+
+![](../images/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%9B%BE%E7%A4%BA.png)
+
+2、思路：
+
+(1)链表题目的套路，首先建立一个哨兵节点，让他在循环中不断地指向下一个节点；
+
+(2)遍历链表， 若当前节点的下一个节点的值为要删除节点的值 val 时，则 curNode.next = curNode.next.next，然后结束循环；如果不相等的话，就 curNode = curNode.next 指向下一个节点，继续循环遍历
+
+(3)如果当前元素的下一个为 null 时退出循环,即 curNode.next = null
+
+```js
+var deleteNode = function (head, val) {
+  let newHead = new ListNode('-1');
+  newHead.next = head;
+  let curNode = newHead;
+  while (curNode.next) {
+    if (curNode.next.val === val) {
+      curNode.next = curNode.next.next;
+      break;
+    }
+    curNode = curNode.next;
+  }
+  return newHead.next;
+};
+```
+
+3、时间复杂度 O(n)和空间复杂度为 O(1),n 为链表的长度
