@@ -169,6 +169,12 @@ console.log(demo.disPlay());
 
 ![两数之和](https://leetcode.cn/problems/add-two-numbers/)
 
+![反向链表](https://leetcode.cn/problems/reverse-linked-list/)
+
+![双指针求交点](https://leetcode-cn.com/problems/intersection-of-two-linked-lists-lcci)
+
+![两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
+
 **合并两个有序链表**
 
 leetCode 链接(https://leetcode-cn.com/problems/merge-two-sorted-lists/)
