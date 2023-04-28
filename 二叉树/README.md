@@ -1,8 +1,8 @@
 二叉树作为一种数据结构还是非常重要的，接下来我结合自己理解来总结一下二叉树的基本要点：
 
-（1）基本概念
-（2）基本术语
-（3）
+- 树的基本要点
+
+- 二叉树
 
 ## 树的基本要点
 
@@ -21,31 +21,19 @@
 ### 2、相关术语
 
 > **节点的度**：一个节点含有的子树的个数称为该节点的度
-
 > **树的度**：一棵树中，最大的节点度称为树的度
-
 > **叶节点或者终端节点**:度为 0 的节点
-
 > **节点深度**：对任意节点 x，x 节点的深度表示为根节点到 x 节点的路径长度。所以根节点深度为 0，第二层节点深度为 1，以此类推
-> 节点高度：对任意节点 x，叶子节点到 x 节点的路径长度就是节点 x 的高度
-
+> **节点高度**：对任意节点 x，叶子节点到 x 节点的路径长度就是节点 x 的高度
 > **树的深度**：一棵树中节点的最大深度就是树的深度，也称为高度
-
 > **父节点**：若一个节点含有子节点，则这个节点称为其子节点的父节点
-
 > **子节点**：一个节点含有的子树的根节点称为该节点的子节点
-> 节点的层次：从根节点开始，根节点为第一层，根的子节点为第二层，
-> 以此类推
-
+> **节点的层次**：从根节点开始，根节点为第一层，根的子节点为第二层， 以此类推
 > **兄弟节点**：拥有共同父节点的节点互称为兄弟节点
-> 度：节点的子树数目就是节点的度
-
+> **度**：节点的子树数目就是节点的度
 > **叶子节点**：度为零的节点就是叶子节点
-
 > **祖先**：对任意节点 x，从根节点到节点 x 的所有节点都是 x 的祖先（节点 x 也是自己的祖先）
-
 > **后代**：对任意节点 x，从节点 x 到叶子节点的所有节点都是 x 的后代（节点 x 也是自己的后代）
-
 > **森林**：m 颗互不相交的树构成的集合就是森林
 
 ### 3、树的种类
@@ -92,7 +80,7 @@ n = n0 + n1 + n2, n = e + 1, e = n1 + 2n2
 
 ### 3、特殊类型
 
-![完全二叉树与满二叉树](../images/FullBT_CompleteBT.jpg)
+![完全二叉树与满二叉树](../images/FullBT_CompleteBT.png)
 
 **完全二叉树**
 
@@ -129,7 +117,7 @@ log2n+1。深度为 k 的完全二元树，至少有 2^(k-1) 个节点，至多�
 
 #### 前序遍历
 
-![前序遍历算法练习](https://leetcode.cn/problems/binary-tree-preorder-traversal/)
+[前序遍历算法练习](https://leetcode.cn/problems/binary-tree-preorder-traversal/)
 
 **递归方法**
 
@@ -166,7 +154,7 @@ var preorderTraversal = (root, arr = []) => {
 
 #### 中序遍历
 
-![中序遍历练习](https://leetcode-cn.com/problems/binary-tree-inorder-traversal)
+[中序遍历练习](https://leetcode-cn.com/problems/binary-tree-inorder-traversal)
 
 **递归**
 
@@ -203,7 +191,7 @@ var inorderTraversal = function (root, arr = []) {
 
 #### 后序遍历
 
-![后序遍历练习](https://leetcode-cn.com/problems/binary-tree-postorder-traversal)
+[后序遍历练习](https://leetcode-cn.com/problems/binary-tree-postorder-traversal)
 
 **递归**
 
@@ -244,3 +232,77 @@ var postorderTraversal = function (root) {
   return res;
 };
 ```
+
+#### 层次遍历
+
+[层次遍历练习](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
+
+层次遍历：即逐层地，从左到右访问所有节点。
+
+**递归**
+
+```js
+var levelOrder = function (root) {
+  if (!root) {
+    return [];
+  }
+  let res = [];
+  dfs(root, 0, res);
+  return res;
+};
+
+function dfs(root, step, res) {
+  if (root) {
+    if (!res[step]) {
+      res[step] = [];
+    }
+    res[step].push(root.val);
+    dfs(root.left, step + 1, res);
+    dfs(root.right, step + 1, res);
+  }
+}
+```
+
+**非递归**
+
+这里借助的就是队列这个数据结构，先进先出的机制。
+
+```js
+var levelOrder = (root) => {
+  let queue = [],
+    res = [];
+  if (root) {
+    queue.push(root);
+  }
+  while (queue.length) {
+    let next_queue = [],
+      now_res = [];
+    while (queue.length) {
+      root = queue.shift();
+      now_res.push(root.val);
+      root.left && next_queue.push(root.left);
+      root.right && next_queue.push(root.right);
+    }
+    queue = next_queue;
+    res.push(now_res);
+  }
+  return res;
+};
+```
+
+---
+
+## LeetCode 相关题目
+
+- [二叉树的最小深度 ⭐](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
+- [二叉树的最大深度 ⭐](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+- [相同的树 ⭐](https://leetcode-cn.com/problems/same-tree/)
+- [二叉搜索树的范围和 ⭐](https://leetcode-cn.com/problems/range-sum-of-bst/)
+- [ 对称二叉树 ⭐](https://leetcode-cn.com/problems/symmetric-tree/)
+- [将有序数组转换为二叉搜索树 ⭐](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
+- [二叉树的层次遍历 II⭐⭐](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
+- [二叉树的最近公共祖先 ⭐⭐](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+- [验证二叉搜索树 ⭐⭐](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+- [路径总和 III⭐⭐](https://leetcode-cn.com/problems/path-sum-iii/)
+- [存在重复元素 III⭐⭐](https://leetcode-cn.com/problems/contains-duplicate-iii/)
+- [计算右侧小于当前元素的个数 ⭐⭐⭐](https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
