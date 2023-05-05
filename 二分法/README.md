@@ -6,7 +6,7 @@
 
 ### 动画实现
 
-![二分查找算法](https://pic2.zhimg.com/v2-baa12de88d8c3c09198e53152e53a409_b.gif)
+[](https://pic2.zhimg.com/v2-baa12de88d8c3c09198e53152e53a409_b.gif)
 
 ### 局限性
 
@@ -229,6 +229,6 @@ console.log(BinarySearchLastSmall(arr, 12));
 
 ### LeetCode 经典例题
 
-- !(二分查找)[https://leetcode.cn/problems/binary-search/]
+- [二分查找 ⭐](https://leetcode.cn/problems/binary-search/)
 
-- !(x 的平方根)[https://leetcode.cn/problems/sqrtx/]
+- [x 的平方根 ⭐⭐](https://leetcode.cn/problems/sqrtx/)
