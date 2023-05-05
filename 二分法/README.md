@@ -6,7 +6,7 @@
 
 ### 动画实现
 
-[](https://pic2.zhimg.com/v2-baa12de88d8c3c09198e53152e53a409_b.gif)
+![二分查找](https://pic2.zhimg.com/v2-baa12de88d8c3c09198e53152e53a409_b.gif)
 
 ### 局限性
 
