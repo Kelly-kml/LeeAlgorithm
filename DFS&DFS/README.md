@@ -35,9 +35,9 @@ DFS 和 BFS 是图遍历的两种非常重要的方式，同时也可以用于�
 
 简单地来：
 
-**DFS（Deep First Search**从根节点出发，然后依次向下继续搜索，直到遇到叶子节点，此时就会向上回溯，继续向为访问过的点继续深度搜索。
+**DFS**(Deep First Search)从根节点出发，然后依次向下继续搜索，直到遇到叶子节点，此时就会向上回溯，继续向为访问过的点继续深度搜索。
 
-**BFS（Breath First Search**BFS 是从根节点开始，沿着树的宽度遍历树的节点，如果发现目标，则演算终止。
+**BFS**(Breath First Search)BFS 是从根节点开始，沿着树的宽度遍历树的节点，如果发现目标，则演算终止。
 
 ### [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
