@@ -285,6 +285,8 @@ LeetCode 链接：https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 
 时间和空间复杂度也一样。
 
+法一：这里最直接的暴力解法，只要知道链表的长度即可解决。
+
 ```js
 var removeNthFromEnd = function (head, n) {
   let newHead = new ListNode('-1');
@@ -307,6 +309,46 @@ var removeNthFromEnd = function (head, n) {
     curNode = curNode.next;
   }
   return newHead.next;
+};
+```
+
+法二：可以采用双指针的方法
+
+**解题思路：**
+
+1. 设置快慢指针，快指针 fast 先提前走 n+1 步，此时快慢指针就是相差 n+1 步，
+
++1 是为了方便后续的节点删除，我们是先获取前一个节点，再删除 cur.next，达到删除的目的
+
+2. 快慢指针一起遍历链表，当 fast 指向 null 时，slow 指针就指向链表的第 N+1 个节点
+
+3. 执行 slow 指向 slow.next，即可实现目标节点的删除。
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function (head, n) {
+  const dummyHead = new ListNode(0, head);
+  let slow = (fast = dummyHead);
+  while (n--) {
+    fast = fast.next;
+  }
+  while (fast.next !== null) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
+  return dummyHead.next;
 };
 ```
 
