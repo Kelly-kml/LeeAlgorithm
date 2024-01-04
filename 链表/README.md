@@ -175,6 +175,10 @@ console.log(demo.disPlay());
 
 ![两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 
+![链表相交](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/)
+
+![环形链表II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
 **合并两个有序链表**
 
 leetCode 链接(https://leetcode-cn.com/problems/merge-two-sorted-lists/)

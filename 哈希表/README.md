@@ -104,6 +104,9 @@ HashMap，它解决 hash 冲突使用就是链地址法。
 - [无重复字符的最长子串 ⭐⭐](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 - [前 K 个高频单词 ⭐⭐](https://leetcode-cn.com/problems/top-k-frequent-words/)
 - [原子的数量 ⭐⭐⭐](https://leetcode-cn.com/problems/number-of-atoms/)
+- ![链表相交](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/)
+- ![环形链表II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+- ![两个数组的交集 ⭐](https://leetcode.cn/problems/intersection-of-two-arrays/)
 
 ---
 
